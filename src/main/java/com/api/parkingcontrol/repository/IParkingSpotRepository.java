@@ -14,7 +14,13 @@ Deletar(Delete) etc
 Importante: Quando estendemos ele já traz a anotação @Repository, então não é necessário colocar a anotação @Repository
  */
 import java.util.UUID;
+
 @Repository
 public interface IParkingSpotRepository extends JpaRepository<ParkingSpotModel, UUID> {
 
+    boolean existsByLicensePlateCar(String licensePlateCar);
+
+    boolean existsByParkingSpotNumber(String parkingSpotNumber);
+
+    boolean existsByApartmentAndBlock(String apartment, String block);
 }
