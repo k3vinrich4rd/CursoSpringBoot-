@@ -25,6 +25,26 @@ public class ParkingSpotController {
 
     @PostMapping //Object para possíveis categorias de retorno
     public ResponseEntity<Object> saveParkingsSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        if (parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: License Plate Car is already in use!");
+        }
+        if (parkingSpotService.existsByParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot is already in use!");
+        }
+        if (parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Parking Spot already registered for this apartment/block!");
+        }
+
+
+
+
+
+
+
+
+
+
+
         var parkingSpotModel = new ParkingSpotModel(); //var substitui a declaração da classe para criar um objeto
         BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel); //Conversão do Dto para model, onde passamos oque vai ser convertido e no que vai ser convertido
         parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC"))); //Setando a data de registro pelo sistema
