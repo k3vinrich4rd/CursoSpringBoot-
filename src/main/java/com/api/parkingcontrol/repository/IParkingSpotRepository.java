@@ -15,6 +15,6 @@ Importante: Quando estendemos ele já traz a anotação @Repository, então não
  */
 import java.util.UUID;
 @Repository
-public interface ParkingSpotRepository extends JpaRepository<ParkingSpotModel, UUID> {
+public interface IParkingSpotRepository extends JpaRepository<ParkingSpotModel, UUID> {
 
 }
